@@ -1,0 +1,35 @@
+SELECT PersonType, JobTitle, SickLeaveHours, 
+     CASE
+           WHEN JobTitle Like '%Executive%' THEN 'Executive'
+           WHEN JobTitle Like '%President%' THEN 'President'
+           WHEN JobTitle LIKE '%Manager%' THEN 'Manager'
+	         WHEN JobTitle Like '%Engineer%' THEN 'Engineer'
+	         WHEN JobTitle Like '%Designer%' THEN 'Designer'
+	         WHEN JobTitle Like '%Marketing%' THEN 'Marketing'
+	         WHEN JobTitle Like '%Production%' THEN 'Production'
+	         WHEN JobTitle Like '%Shipping%' THEN 'Shipping'
+	         WHEN JobTitle Like '%Stocker%' THEN 'Stocker'
+	         WHEN JobTitle Like '%Quality%' THEN 'Quality'
+	         WHEN JobTitle Like '%Scheduling%' THEN 'Scheduling'
+	         WHEN JobTitle Like '%Master%' THEN 'Master'
+	         WHEN JobTitle Like '%Facilities%' THEN 'Facilities'
+	         WHEN JobTitle Like '%Maintenance%' THEN 'Maintenance'
+	         WHEN JobTitle Like '%Janitor%' THEN 'Janitor'
+	         WHEN JobTitle Like '%Human Resources%' THEN 'HR'
+           WHEN JobTitle Like '%Accounts%' THEN 'Accounts'
+	         WHEN JobTitle Like '%Buyer%' THEN 'Buyer'
+	         WHEN JobTitle Like '%Purchasing%' THEN 'Purchasing'
+	         WHEN JobTitle Like '%Network%' THEN 'Network'
+	         WHEN JobTitle Like '%Application%' THEN 'Application'
+	         WHEN JobTitle Like '%Database%' THEN 'Database'
+           WHEN JobTitle Like '%Sales%' THEN 'Sales'
+	         WHEN JobTitle Like '%%' THEN 'Engineer'
+	         ELSE 'Misc' END AS Titles
+   FROM HumanResources.Employee AS e
+   INNER JOIN Person.Person AS p
+   ON e.BusinessEntityID = P.BusinessEntityID
+
+
+SELECT Titles, AVG(SickLeaveHours) AS avg_sickleavesFROM SickLeaves
+GROUP BY Titles
+ORDER BY avg_sickleaves DESC;
